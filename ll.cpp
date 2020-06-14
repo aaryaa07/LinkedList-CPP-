@@ -165,4 +165,16 @@ int main()
 	deleteNode(head,3);//6->7->2->1->4->5->8->9
 	deleteNode(head,6);//7->2->1->4->5->8->9
 	print(head);
+	int n;
+	cout<<"Enter no. of nos. you want to append to the list"<<endl;
+	cin>>n;
+	while(n!=0)
+	{
+		int x;
+		cin>>x;
+		insertEnd(head,x);
+		n--;
+	}
+	print(head);//Linked List after appending elements taken in by user
+
 }
