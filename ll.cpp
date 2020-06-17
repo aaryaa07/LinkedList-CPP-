@@ -143,7 +143,20 @@ void deleteNode(node*& head,int ele)
 
 	}
 }
-
+void reverseList(node*& head)
+{
+	node* p=NULL;
+	node* q=NULL;
+	node* c=head;
+	while(c!=NULL)
+	{
+		q=c;
+		c=c->next;
+		q->next=p;
+		p=q;
+	}
+	head=q;
+}
 
 
 int main()
@@ -176,5 +189,6 @@ int main()
 		n--;
 	}
 	print(head);//Linked List after appending elements taken in by user
-
+	reverseList(head);
+	print(head);//Linked List after reversing the list
 }
