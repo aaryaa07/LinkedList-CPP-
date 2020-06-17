@@ -185,6 +185,23 @@ void midptRunnerTech(node* head)
 	}
 	cout<<"midpoint is "<<q->data<<endl;
 }
+void eleFromEnd(node* head,int k)//aim is to traverse n-k times from head but without calculating n
+{
+
+	node* fast=head;
+	node* slow= head;
+	while(k>0)//move fast ahead k times
+	{
+		fast=fast->next;
+		k--;
+	}
+	while(fast!=NULL)//it will take n-k steps for fast to reach end. slow will traverse n-k steps from head!
+	{
+		slow=slow->next;
+		fast=fast->next;
+	}
+	cout<<slow->data<<endl;
+}
 
 
 int main()
@@ -224,5 +241,11 @@ int main()
 	recReverse(head,p,q);//Linked list after reversing the list recursively
 	print(head);
 	midptRunnerTech(head);//Midpoint of Linked List without calculating length of linked List
+	int k;
+	cout<<"enter kth last position"<<endl;//Find kth last element without calculating length of linked List
+	cin>>k;
+	eleFromEnd(head,k);
+
+
 
 }
