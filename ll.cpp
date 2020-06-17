@@ -159,6 +159,23 @@ void reverseList(node*& head)
 }
 
 
+void recReverse(node*& head,node*& p,node*& q){
+	if(head==NULL)
+	{
+		head=p;
+		return;
+	}
+	p=head;
+	head=head->next;
+	p->next=q;
+	q=p;
+	recReverse(head,p,q);
+
+
+
+}
+
+
 int main()
 {
 	node* head =NULL;
@@ -179,7 +196,7 @@ int main()
 	deleteNode(head,6);//7->2->1->4->5->8->9
 	print(head);
 	int n;
-	cout<<"Enter no. of nos. you want to append to the list"<<endl;
+	/*cout<<"Enter no. of nos. you want to append to the list"<<endl;
 	cin>>n;
 	while(n!=0)
 	{
@@ -188,7 +205,11 @@ int main()
 		insertEnd(head,x);
 		n--;
 	}
-	print(head);//Linked List after appending elements taken in by user
+	print(head);//Linked List after appending elements taken in by user */
 	reverseList(head);
 	print(head);//Linked List after reversing the list
+	node *p=NULL;
+	node *q=NULL;
+	recReverse(head,p,q);//Linked list after reversing the list recursively
+	print(head);
 }
