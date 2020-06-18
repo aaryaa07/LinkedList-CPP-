@@ -39,6 +39,13 @@ void print(node* head)//dont want to update head
 
 void insertEnd(node*& head,int data)
 {
+	if(head==NULL)
+	{
+		node*n=new node(data);
+		head=n;
+		return;
+
+	}
 	node*n=new node(data);
 	node* curr=head;
 	while(curr->next!=NULL)
@@ -202,13 +209,108 @@ void eleFromEnd(node* head,int k)//aim is to traverse n-k times from head but wi
 	}
 	cout<<slow->data<<endl;
 }
+node* mergeList(node* head1,node* head2)//merge two sorted lists
+{
+	node* h1=head1;
+	node* h2=head2;
+	if(h1->data<h2->data)
+	{
+		node* n=h2;
+		
+		node*c=h1->next;
+		while(c!=NULL&&n!=NULL)
+	{
+		if(c->data<n->data)
+		{
+			h1->next=c;
+			h1=c;
+			c=c->next;
+
+		}
+		else
+		{
+			h1->next=n;
+			h1=n;
+			n=n->next;
+		}
+	}
+	if(c==NULL)
+	{
+		while(n!=NULL)
+		{
+			h1->next=n;
+			h1=n;
+			n=n->next;
+		}
+	}
+	else if(n==NULL)
+	{
+		while(c!=NULL)
+		{
+			h1->next=c;
+			h1=c;
+			c=c->next;
+
+		}
+	}
+	return head1;
+	
+	}
+	else
+	{
+		node* n=h1;
+		
+		node*c=h2->next;
+		while(c!=NULL&&n!=NULL)
+	{
+		if(c->data<n->data)
+		{
+			h2->next=c;
+			h2=c;
+			c=c->next;
+
+		}
+		else
+		{
+			h2->next=n;
+			h2=n;
+			n=n->next;
+		}
+	}
+	if(c==NULL)
+	{
+		while(n!=NULL)
+		{
+			h2->next=n;
+			h2=n;
+			n=n->next;
+		}
+	}
+	else if(n==NULL)
+	{
+		while(c!=NULL)
+		{
+			h2->next=c;
+			h2=c;
+			c=c->next;
+
+		}
+	}
+	return head2;
+	
+
+	}
+
+
+
+}
+
 
 
 int main()
 {
 	node* head =NULL;
 	insertHead(head,1);//1
-	insertHead(head,2);//2->1
 	insertHead(head,3);//3->2->1 
 	insertEnd(head,4);//3->2->1->4
 	insertEnd(head,5);//3->2->1->4->5
@@ -247,5 +349,33 @@ int main()
 	eleFromEnd(head,k);
 
 
+
+	node *head1=NULL;
+	node* head2=NULL;
+	int n1;
+	cout<<"Enter no. of nos. you want to append to the list1(sorted)"<<endl;
+	cin>>n1;
+	while(n1!=0)
+	{
+		int x1;
+		cin>>x1;
+		insertEnd(head1,x1);
+		n1--;
+	}
+	print(head1);
+	int n2;
+	cout<<"Enter no. of nos. you want to append to the list2(sorted)"<<endl;
+	cin>>n2;
+	while(n2!=0)
+	{
+		int x2;
+		cin>>x2;
+		insertEnd(head2,x2);
+		n2--;
+	}
+	print(head2);
+	node* a;
+	a=mergeList(head1,head2);
+	print(a);
 
 }
