@@ -181,7 +181,7 @@ void recReverse(node*& head,node*& p,node*& q){
 
 
 }
-void midptRunnerTech(node* head)
+node* midptRunnerTech(node* head)
 {
 	node*p=head;
 	node*q=head;
@@ -191,6 +191,7 @@ void midptRunnerTech(node* head)
 		q=q->next;
 	}
 	cout<<"midpoint is "<<q->data<<endl;
+	return q;
 }
 void eleFromEnd(node* head,int k)//aim is to traverse n-k times from head but without calculating n
 {
@@ -304,6 +305,26 @@ node* mergeList(node* head1,node* head2)//merge two sorted lists
 
 
 }
+node* mergeSort(node* head)
+{
+	if(head==NULL||head->next==NULL)//base case
+	{
+		return head;
+	}
+	//1. Midpt handling
+	node* mid=midptRunnerTech(head);
+	node* a=head;
+	node* b=mid->next;
+	mid->next=NULL;
+	//2. splitting
+	a=mergeSort(a);
+	b=mergeSort(b);
+
+	//3.merging
+	node* c= mergeList(a,b);
+	return c;
+
+}
 
 
 
@@ -377,5 +398,7 @@ int main()
 	node* a;
 	a=mergeList(head1,head2);
 	print(a);
+	node* m=mergeSort(head);
+	print(m);
 
 }
